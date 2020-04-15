@@ -3,15 +3,16 @@ library(shiny)
 library(shinydashboard)
 library(plotly)
 
-datum=c("06.04.2020", "07.04.2020", "08.04.2020", "09.04.2020", "10.04.2020", "11.04.2020", "12.04.2020", "13.04.2020", "14.04.2020")
-chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen")
-gesamt = 6767
-gesamt_im=5196
-gesamt_em=914
-gesamt_ra=127
-gesamt_ca=530
-gesamt_ess=7
-
+datum=c("06.04.2020", "07.04.2020", "08.04.2020", "09.04.2020", "10.04.2020", "11.04.2020", "12.04.2020", "13.04.2020", "14.04.2020", "15.04.2020")
+chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis")
+gesamt_an=16362
+gesamt = 8275
+gesamt_im=6607
+gesamt_em=970
+gesamt_ra=139
+gesamt_ca=559
+gesamt_ess=35
+gesamt_mtk=26
 
 
 
@@ -45,12 +46,15 @@ shinyUI(dashboardPage(
                     
                     fluidRow(
                         column(width=12,
+                               valueBox(gesamt_an, "Gesamtanzahl Anfragen Corey", color = "blue", width=2),
                                valueBox(gesamt, "Gesamtanzahl Besucher Corey", width=2),
                                valueBox(gesamt_im, "Gesamtanzahl Besucher Corey-IM", color = "orange", width=2),
                                valueBox(gesamt_em, "Gesamtanzahl Besucher Corey-Emmendingen", color = "green", width=2),
                                valueBox(gesamt_ra, "Gesamtanzahl Besucher Corey-Ravensburg", color = "red", width=2),
                                valueBox(gesamt_ca, "Gesamtanzahl Besucher Corey-Calw", color = "purple", width=2),
-                               valueBox(gesamt_ess, "Gesamtanzahl Besucher Corey-Esslingen", color = "yellow", width=2)
+                               valueBox(gesamt_ess, "Gesamtanzahl Besucher Corey-Esslingen", color = "navy", width=2),
+                               valueBox(gesamt_mtk, "Gesamtanzahl Besucher Corey-Main-Tauber-Kreis", color = "light-blue", width=2)
+                               
                         )
                         
                     ),
