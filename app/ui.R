@@ -3,16 +3,19 @@ library(shiny)
 library(shinydashboard)
 library(plotly)
 
-datum=c("16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
-chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis")
-gesamt_an=24364
-gesamt = 10152
-gesamt_im=8128
-gesamt_em=1028
-gesamt_ra=147
-gesamt_ca=598
-gesamt_ess=64
-gesamt_mtk=181
+datum=c("19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
+chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis", "Corey-Heilbronn", "Corey-Loerrach", "Corey-Reutlingen")
+gesamt_an=28184
+gesamt = 14114
+gesamt_im=12078
+gesamt_em=1167
+gesamt_ra=160
+gesamt_ca=709
+gesamt_ess=89
+gesamt_mtk=671
+gesamt_he=6
+gesamt_lo=0
+gesamt_re=0
 
 
 
@@ -53,7 +56,10 @@ shinyUI(dashboardPage(
                                valueBox(gesamt_ra, "Gesamtanzahl Besucher Corey-Ravensburg", color = "red", width=2),
                                valueBox(gesamt_ca, "Gesamtanzahl Besucher Corey-Calw", color = "purple", width=2),
                                valueBox(gesamt_ess, "Gesamtanzahl Besucher Corey-Esslingen", color = "navy", width=2),
-                               valueBox(gesamt_mtk, "Gesamtanzahl Besucher Corey-Main-Tauber-Kreis", color = "light-blue", width=2)
+                               valueBox(gesamt_mtk, "Gesamtanzahl Besucher Corey-Main-Tauber-Kreis", color = "light-blue", width=2),
+                               valueBox(gesamt_he, "Gesamtanzahl Besucher Corey-Heilbronn", color = "maroon", width=2),
+                               valueBox(gesamt_lo, "Gesamtanzahl Besucher Corey-Lörrach", color = "fuchsia", width=2),
+                               valueBox(gesamt_re, "Gesamtanzahl Besucher Corey-Reutlingen", color = "teal", width=2)
                                
                         )
                         
