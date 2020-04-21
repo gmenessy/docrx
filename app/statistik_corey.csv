@@ -100,7 +100,7 @@ Datum;Anzahl ;Positiv;Negativ;Prozent_Positiv;Prozent_Negativ;Chatbot
 15.04.2020;0;0;0;0;0;Corey-Loerrach
 15.04.2020;0;0;0;0;0;Corey-Reutlingen
 16.04.2020;1877;1813;64;97;3;Corey
-16.04.2020;1772;1717;55;97;3;Corey-IM
+16.04.2020;1772;1727;45;97;3;Corey-IM
 16.04.2020;58;51;7;88;12;Corey-Emmendingen
 16.04.2020;8;8;0;100;0;Corey-Ravensburg
 16.04.2020;39;37;2;95;5;Corey-Calw
@@ -110,7 +110,7 @@ Datum;Anzahl ;Positiv;Negativ;Prozent_Positiv;Prozent_Negativ;Chatbot
 16.04.2020;0;0;0;0;0;Corey-Loerrach
 16.04.2020;0;0;0;0;0;Corey-Reutlingen
 17.04.2020;1525;1459;66;96;4;Corey
-17.04.2020;1424;1369;55;96;4;Corey-IM
+17.04.2020;1424;1371;53;96;4;Corey-IM
 17.04.2020;50;46;4;92;8;Corey-Emmendingen
 17.04.2020;10;10;0;100;0;Corey-Ravensburg
 17.04.2020;41;39;2;95;5;Corey-Calw
@@ -120,7 +120,7 @@ Datum;Anzahl ;Positiv;Negativ;Prozent_Positiv;Prozent_Negativ;Chatbot
 17.04.2020;0;0;0;0;0;Corey-Loerrach
 17.04.2020;0;0;0;0;0;Corey-Reutlingen
 18.04.2020;1610;1575;35;98;2;Corey
-18.04.2020;1520;1465;55;96;4;Corey-IM
+18.04.2020;1520;1493;27;98;2;Corey-IM
 18.04.2020;43;39;4;91;9;Corey-Emmendingen
 18.04.2020;3;3;0;100;0;Corey-Ravensburg
 18.04.2020;44;44;0;100;0;Corey-Calw
@@ -130,7 +130,7 @@ Datum;Anzahl ;Positiv;Negativ;Prozent_Positiv;Prozent_Negativ;Chatbot
 18.04.2020;0;0;0;0;0;Corey-Loerrach
 18.04.2020;0;0;0;0;0;Corey-Reutlingen
 19.04.2020;827;802;25;97;3;Corey
-19.04.2020;755;700;55;93;7;Corey-IM
+19.04.2020;755;733;22;97;3;Corey-IM
 19.04.2020;46;46;0;100;0;Corey-Emmendingen
 19.04.2020;0;0;0;0;0;Corey-Ravensburg
 19.04.2020;26;24;2;92;8;Corey-Calw
@@ -140,7 +140,7 @@ Datum;Anzahl ;Positiv;Negativ;Prozent_Positiv;Prozent_Negativ;Chatbot
 19.04.2020;0;0;0;0;0;Corey-Loerrach
 19.04.2020;0;0;0;0;0;Corey-Reutlingen
 20.04.2020;1581;1551;30;98;2;Corey
-20.04.2020;1489;1434;55;96;4;Corey-IM
+20.04.2020;1489;1473;16;99;1;Corey-IM
 20.04.2020;51;51;0;100;0;Corey-Emmendingen
 20.04.2020;14;14;0;100;0;Corey-Ravensburg
 20.04.2020;27;27;0;100;0;Corey-Calw
@@ -149,3 +149,13 @@ Datum;Anzahl ;Positiv;Negativ;Prozent_Positiv;Prozent_Negativ;Chatbot
 20.04.2020;61;53;8;87;13;Corey-Heilbronn
 20.04.2020;6;6;0;100;0;Corey-Loerrach
 20.04.2020;1;1;0;100;0;Corey-Reutlingen
+21.04.2020;2021;2001;20;99;1;Corey
+21.04.2020;1941;1930;11;99;1;Corey-IM
+21.04.2020;44;39;5;89;11;Corey-Emmendingen
+21.04.2020;6;6;0;100;0;Corey-Ravensburg
+21.04.2020;30;30;0;100;0;Corey-Calw
+21.04.2020;21;21;0;100;0;Corey-Esslingen
+21.04.2020;92;89;3;97;3;Corey-Main-Tauber-Kreis
+21.04.2020;6;5;1;83;17;Corey-Heilbronn
+21.04.2020;1;1;0;100;0;Corey-Loerrach
+21.04.2020;8;8;0;100;0;Corey-Reutlingen
