@@ -3,19 +3,20 @@ library(shiny)
 library(shinydashboard)
 library(plotly)
 
-datum=c("19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
+datum=c("20.04.2020", "19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
 chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis", "Corey-Heilbronn", "Corey-Loerrach", "Corey-Reutlingen")
-gesamt_an=28184
-gesamt = 14114
-gesamt_im=12078
-gesamt_em=1167
-gesamt_ra=160
-gesamt_ca=709
-gesamt_ess=89
-gesamt_mtk=671
-gesamt_he=6
-gesamt_lo=0
-gesamt_re=0
+gesamt_an=29684
+gesamt = 15695
+gesamt_im=13567
+gesamt_em=1218
+gesamt_ra=174
+gesamt_ca=736
+gesamt_ess=117
+gesamt_mtk=758
+gesamt_he=67
+gesamt_lo=6
+gesamt_re=1
+
 
 
 
