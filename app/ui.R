@@ -3,20 +3,20 @@ library(shiny)
 library(shinydashboard)
 library(plotly)
 
-datum=c("23.04.2020", "22.04.2020", "21.04.2020", "20.04.2020", "19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
-chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis", "Corey-Heilbronn", "Corey-Loerrach", "Corey-Reutlingen")
-gesamt_an=44024
-gesamt = 24636
-gesamt_im=22264
-gesamt_em=1316
-gesamt_ra=252
-gesamt_ca=804
-gesamt_ess=181
-gesamt_mtk=999
-gesamt_he=135
-gesamt_lo=25
-gesamt_re=368
-
+datum=c("29.04.2020", "28.04.2020", "27.04.2020", "26.04.2020", "25.04.2020", "24.04.2020", "23.04.2020", "22.04.2020", "21.04.2020", "20.04.2020", "19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
+chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis", "Corey-Heilbronn", "Corey-Loerrach", "Corey-Reutlingen", "Corey-Heidenheim")
+gesamt_an=80071
+gesamt = 44484
+gesamt_im=41730
+gesamt_em=1485
+gesamt_ra=323
+gesamt_ca=946
+gesamt_ess=302
+gesamt_mtk=1425
+gesamt_he=260
+gesamt_lo=75
+gesamt_re=698
+gesamt_hei=203
 
 
 
@@ -60,7 +60,8 @@ shinyUI(dashboardPage(
                                valueBox(gesamt_mtk, "Gesamtanzahl Besucher Corey-Main-Tauber-Kreis", color = "light-blue", width=2),
                                valueBox(gesamt_he, "Gesamtanzahl Besucher Corey-Heilbronn", color = "maroon", width=2),
                                valueBox(gesamt_lo, "Gesamtanzahl Besucher Corey-Lörrach", color = "fuchsia", width=2),
-                               valueBox(gesamt_re, "Gesamtanzahl Besucher Corey-Reutlingen", color = "teal", width=2)
+                               valueBox(gesamt_re, "Gesamtanzahl Besucher Corey-Reutlingen", color = "teal", width=2),
+                               valueBox(gesamt_hei, "Gesamtanzahl Besucher Corey-Heidenheim", color = "aqua", width=2)
                                
                         )
                         
@@ -114,8 +115,8 @@ shinyUI(dashboardPage(
                     
                     
                     fluidRow(
-                        column(width = 3, align = "center"),
-                        column(width = 6, align = "center",
+                        column(width = 1, align = "center"),
+                        column(width = 10, align = "center",
                                box(
                                    title = "Anzahl von Feedbacks",
                                    status = "primary",
@@ -124,7 +125,7 @@ shinyUI(dashboardPage(
                                    width = NULL,
                                    plotlyOutput("Plotfeed", height = 600)
                                )),
-                        column(width = 3, align = "center")
+                        column(width = 1, align = "center")
                     )
             )
             )
