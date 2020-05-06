@@ -3,20 +3,21 @@ library(shiny)
 library(shinydashboard)
 library(plotly)
 
-datum=c("04.05.2020", "03.05.2020", "02.05.2020", "01.05.2020", "30.04.2020", "29.04.2020", "28.04.2020", "27.04.2020", "26.04.2020", "25.04.2020", "24.04.2020", "23.04.2020", "22.04.2020", "21.04.2020", "20.04.2020", "19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
+datum=c("05.05.2020", "04.05.2020", "03.05.2020", "02.05.2020", "01.05.2020", "30.04.2020", "29.04.2020", "28.04.2020", "27.04.2020", "26.04.2020", "25.04.2020", "24.04.2020", "23.04.2020", "22.04.2020", "21.04.2020", "20.04.2020", "19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
 chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis", "Corey-Heilbronn", "Corey-Loerrach", "Corey-Reutlingen", "Corey-Heidenheim")
-gesamt_an=117632
-gesamt = 65352
-gesamt_im=61133
-gesamt_em=1604
-gesamt_ra=368
-gesamt_ca=1016
-gesamt_ess=388
-gesamt_mtk=1684
-gesamt_he=316
-gesamt_lo=107
-gesamt_re=861
-gesamt_hei=838
+gesamt_an=125958
+gesamt = 69977
+gesamt_im=65495
+gesamt_em=1624
+gesamt_ra=374
+gesamt_ca=1040
+gesamt_ess=423
+gesamt_mtk=1741
+gesamt_he=332
+gesamt_lo=113
+gesamt_re=888
+gesamt_hei=910
+
 
 
 
@@ -62,6 +63,20 @@ shinyUI(dashboardPage(
                                valueBox(gesamt_lo, "Gesamtanzahl Besucher Corey-Lörrach", color = "fuchsia", width=2),
                                valueBox(gesamt_re, "Gesamtanzahl Besucher Corey-Reutlingen", color = "teal", width=2),
                                valueBox(gesamt_hei, "Gesamtanzahl Besucher Corey-Heidenheim", color = "aqua", width=2)
+                               
+                        )
+                        
+                    ),
+                    fluidRow(
+                        column(width=12,
+                               box(
+                                   title = "Top10 Themen",
+                                   status = "primary",
+                                   solidHeader = TRUE,
+                                   collapsible = TRUE,
+                                   width = NULL,
+                                   plotlyOutput("Plottop", height = 480)
+                               )
                                
                         )
                         
