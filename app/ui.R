@@ -3,20 +3,22 @@ library(shiny)
 library(shinydashboard)
 library(plotly)
 
-datum=c("19.05.2020", "18.05.2020", "17.05.2020", "16.05.2020", "15.05.2020", "14.05.2020", "13.05.2020", "12.05.2020", "11.05.2020", "10.05.2020", "09.05.2020", "08.05.2020", "07.05.2020", "06.05.2020", "05.05.2020", "04.05.2020", "03.05.2020", "02.05.2020", "01.05.2020", "30.04.2020", "29.04.2020", "28.04.2020", "27.04.2020", "26.04.2020", "25.04.2020", "24.04.2020", "23.04.2020", "22.04.2020", "21.04.2020", "20.04.2020", "19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
-chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis", "Corey-Heilbronn", "Corey-Loerrach", "Corey-Reutlingen", "Corey-Heidenheim")
-gesamt_an=220017
-gesamt = 137511
-gesamt_im=129613
-gesamt_em=1938
-gesamt_ra=495
-gesamt_ca=1304
-gesamt_ess=679
-gesamt_mtk=2529
-gesamt_he=623
-gesamt_lo=201
-gesamt_re=1340
-gesamt_hei=1752
+datum=c("24.05.2020", "23.05.2020", "22.05.2020", "21.05.2020", "20.05.2020", "19.05.2020", "18.05.2020", "17.05.2020", "16.05.2020", "15.05.2020", "14.05.2020", "13.05.2020", "12.05.2020", "11.05.2020", "10.05.2020", "09.05.2020", "08.05.2020", "07.05.2020", "06.05.2020", "05.05.2020", "04.05.2020", "03.05.2020", "02.05.2020", "01.05.2020", "30.04.2020", "29.04.2020", "28.04.2020", "27.04.2020", "26.04.2020", "25.04.2020", "24.04.2020", "23.04.2020", "22.04.2020", "21.04.2020", "20.04.2020", "19.04.2020", "18.04.2020","17.04.2020", "16.04.2020", "15.04.2020","14.04.2020", "13.04.2020", "12.04.2020", "11.04.2020", "10.04.2020", "09.04.2020", "08.04.2020", "07.04.2020", "06.04.2020")
+chatbot=c("Corey", "Corey-IM", "Corey-Emmendingen", "Corey-Ravensburg", "Corey-Calw", "Corey-Esslingen", "Corey-Main-Tauber-Kreis", "Corey-Heilbronn", "Corey-Loerrach", "Corey-Reutlingen", "Corey-Heidenheim", "Corey-Karlsruhe", "Corey-Mannheim")
+gesamt_an=249536
+gesamt = 155960
+gesamt_im=147223
+gesamt_em=2041
+gesamt_ra=527
+gesamt_ca=1405
+gesamt_ess=709
+gesamt_mtk=2686
+gesamt_he=685
+gesamt_lo=227
+gesamt_re=1407
+gesamt_hei=1959
+gesamt_ka=34
+gesamt_ma=20
 
 
 
@@ -58,7 +60,9 @@ shinyUI(dashboardPage(
                                valueBox(gesamt_he, "Gesamtanzahl Besucher Corey-Heilbronn", color = "maroon", width=2),
                                valueBox(gesamt_lo, "Gesamtanzahl Besucher Corey-Lörrach", color = "fuchsia", width=2),
                                valueBox(gesamt_re, "Gesamtanzahl Besucher Corey-Reutlingen", color = "teal", width=2),
-                               valueBox(gesamt_hei, "Gesamtanzahl Besucher Corey-Heidenheim", color = "aqua", width=2)
+                               valueBox(gesamt_hei, "Gesamtanzahl Besucher Corey-Heidenheim", color = "aqua", width=2),
+                               valueBox(gesamt_ka, "Gesamtanzahl Besucher Corey-Karlsruhe", color = "blue", width=2),
+                               valueBox(gesamt_ma, "Gesamtanzahl Besucher Corey-Mannheim", color = "yellow", width=2)
                                
                         )
                         

@@ -88,6 +88,21 @@ trace_chei_Positiv<- trace_chei$Positiv
 trace_chei_Negativ<- trace_chei$Negativ
 trace_chei_Prozent_Positiv<- trace_chei$Prozent_Positiv
 trace_chei_Prozent_Negativ<- trace_chei$Prozent_Negativ
+trace_cka <- dash[dash$Chatbot=="Corey-Karlsruhe", ]
+trace_cka_Datum<- trace_cka$Datum
+trace_cka_Anzahl<- trace_cka$Anzahl
+trace_cka_Positiv<- trace_cka$Positiv
+trace_cka_Negativ<- trace_cka$Negativ
+trace_cka_Prozent_Positiv<- trace_cka$Prozent_Positiv
+trace_cka_Prozent_Negativ<- trace_cka$Prozent_Negativ
+trace_cma <- dash[dash$Chatbot=="Corey-Mannheim", ]
+trace_cma_Datum<- trace_cma$Datum
+trace_cma_Anzahl<- trace_cma$Anzahl
+trace_cma_Positiv<- trace_cma$Positiv
+trace_cma_Negativ<- trace_cma$Negativ
+trace_cma_Prozent_Positiv<- trace_cma$Prozent_Positiv
+trace_cma_Prozent_Negativ<- trace_cma$Prozent_Negativ
+print(trace_cka)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
@@ -95,7 +110,7 @@ shinyServer(function(input, output) {
     output$Plotdash <- renderPlotly({
         
             
-        datadash <- data.frame(trace_c_Datum, trace_c_Anzahl, trace_cim_Anzahl, trace_cem_Anzahl, trace_cra_Anzahl, trace_cca_Anzahl, trace_cess_Anzahl, trace_cmtk$Anzahl, trace_che_Anzahl, trace_clo_Anzahl, trace_cre_Anzahl)
+        datadash <- data.frame(trace_c_Datum, trace_c_Anzahl, trace_cim_Anzahl, trace_cem_Anzahl, trace_cra_Anzahl, trace_cca_Anzahl, trace_cess_Anzahl, trace_cmtk$Anzahl, trace_che_Anzahl, trace_clo_Anzahl, trace_cre_Anzahl, trace_chei_Anzahl, trace_cka_Anzahl, trace_cma_Anzahl)
         a <- list(title="Besucheranzahl")
         b<- list(title="Datum")
 
@@ -112,6 +127,8 @@ shinyServer(function(input, output) {
         Plotdash <- Plotdash %>% add_trace(y = ~trace_clo$Anzahl, name = 'Corey-Lörrach',type = 'scatter',mode = 'lines+markers', line=list(width=4, shape = "spline"))
         Plotdash <- Plotdash %>% add_trace(y = ~trace_cre$Anzahl, name = 'Corey-Reutlingen',type = 'scatter',mode = 'lines+markers', line=list(width=4, shape = "spline"))
         Plotdash <- Plotdash %>% add_trace(y = ~trace_chei$Anzahl, name = 'Corey-Heidenheim',type = 'scatter',mode = 'lines+markers', line=list(width=4, shape = "spline"))
+        Plotdash <- Plotdash %>% add_trace(y = ~trace_cka$Anzahl, name = 'Corey-Karlsruhe',type = 'scatter',mode = 'lines+markers', line=list(width=4, shape = "spline"))
+        Plotdash <- Plotdash %>% add_trace(y = ~trace_cma$Anzahl, name = 'Corey-Mannheim',type = 'scatter',mode = 'lines+markers', line=list(width=4, shape = "spline"))
         Plotdash <- Plotdash %>%layout(paper_bgcolor='transparent',
                                        plot_bgcolor='transparent',
                                        yaxis = a, xaxis = b)
@@ -308,6 +325,1066 @@ shinyServer(function(input, output) {
                 Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Anzahl, name = 'Besucheranzahl',type = 'bar') 
                 Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Positiv, name = 'korrekt beantwortet',type = 'bar')
                 Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            
+        }
+        else if (input$filterD== "24.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_c_Anzahl = trace_c_Anzahl[49], trace_c_Positiv = trace_c_Positiv[49], trace_c_Negativ = trace_c_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cim_Anzahl=trace_cim_Anzahl[49], trace_cim_Positiv=trace_cim_Positiv[49], trace_cim_Negativ=trace_cim_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cem_Anzahl=trace_cem_Anzahl[49], trace_cem_Positiv=trace_cem_Positiv[49], trace_cem_Negativ=trace_cem_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cra_Anzahl=trace_cra_Anzahl[49], trace_cra_Positiv=trace_cra_Positiv[49], trace_cra_Negativ=trace_cra_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cca_Anzahl=trace_cca_Anzahl[49], trace_cca_Positiv=trace_cca_Positiv[49], trace_cca_Negativ=trace_cca_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cess_Anzahl=trace_cess_Anzahl[49], trace_cess_Positiv=trace_cess_Positiv[49], trace_cess_Negativ=trace_cess_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cmtk_Anzahl=trace_cmtk_Anzahl[49], trace_cmtk_Positiv=trace_cmtk_Positiv[49], trace_cmtk_Negativ=trace_cmtk_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_che_Anzahl=trace_che_Anzahl[49], trace_che_Positiv=trace_che_Positiv[49], trace_che_Negativ=trace_che_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_clo_Anzahl=trace_clo_Anzahl[49], trace_clo_Positiv=trace_clo_Positiv[49], trace_clo_Negativ=trace_clo_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cre_Anzahl=trace_cre_Anzahl[49], trace_cre_Positiv=trace_cre_Positiv[49], trace_cre_Negativ=trace_cre_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_chei_Anzahl=trace_chei_Anzahl[49], trace_chei_Positiv=trace_chei_Positiv[49], trace_chei_Negativ=trace_chei_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cka_Anzahl=trace_cka_Anzahl[49], trace_cka_Positiv=trace_cka_Positiv[49], trace_cka_Negativ=trace_cka_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("24.05.2020")
+                data <- data.frame(x, trace_cma_Anzahl=trace_cma_Anzahl[49], trace_cma_Positiv=trace_cma_Positiv[49], trace_cma_Negativ=trace_cma_Negativ[49])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            
+        }
+        else if (input$filterD== "23.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_c_Anzahl = trace_c_Anzahl[48], trace_c_Positiv = trace_c_Positiv[48], trace_c_Negativ = trace_c_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cim_Anzahl=trace_cim_Anzahl[48], trace_cim_Positiv=trace_cim_Positiv[48], trace_cim_Negativ=trace_cim_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cem_Anzahl=trace_cem_Anzahl[48], trace_cem_Positiv=trace_cem_Positiv[48], trace_cem_Negativ=trace_cem_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cra_Anzahl=trace_cra_Anzahl[48], trace_cra_Positiv=trace_cra_Positiv[48], trace_cra_Negativ=trace_cra_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cca_Anzahl=trace_cca_Anzahl[48], trace_cca_Positiv=trace_cca_Positiv[48], trace_cca_Negativ=trace_cca_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cess_Anzahl=trace_cess_Anzahl[48], trace_cess_Positiv=trace_cess_Positiv[48], trace_cess_Negativ=trace_cess_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cmtk_Anzahl=trace_cmtk_Anzahl[48], trace_cmtk_Positiv=trace_cmtk_Positiv[48], trace_cmtk_Negativ=trace_cmtk_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_che_Anzahl=trace_che_Anzahl[48], trace_che_Positiv=trace_che_Positiv[48], trace_che_Negativ=trace_che_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_clo_Anzahl=trace_clo_Anzahl[48], trace_clo_Positiv=trace_clo_Positiv[48], trace_clo_Negativ=trace_clo_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cre_Anzahl=trace_cre_Anzahl[48], trace_cre_Positiv=trace_cre_Positiv[48], trace_cre_Negativ=trace_cre_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_chei_Anzahl=trace_chei_Anzahl[48], trace_chei_Positiv=trace_chei_Positiv[48], trace_chei_Negativ=trace_chei_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cka_Anzahl=trace_cka_Anzahl[48], trace_cka_Positiv=trace_cka_Positiv[48], trace_cka_Negativ=trace_cka_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("23.05.2020")
+                data <- data.frame(x, trace_cma_Anzahl=trace_cma_Anzahl[48], trace_cma_Positiv=trace_cma_Positiv[48], trace_cma_Negativ=trace_cma_Negativ[48])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            
+        }
+        else if (input$filterD== "22.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_c_Anzahl = trace_c_Anzahl[47], trace_c_Positiv = trace_c_Positiv[47], trace_c_Negativ = trace_c_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cim_Anzahl=trace_cim_Anzahl[47], trace_cim_Positiv=trace_cim_Positiv[47], trace_cim_Negativ=trace_cim_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cem_Anzahl=trace_cem_Anzahl[47], trace_cem_Positiv=trace_cem_Positiv[47], trace_cem_Negativ=trace_cem_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cra_Anzahl=trace_cra_Anzahl[47], trace_cra_Positiv=trace_cra_Positiv[47], trace_cra_Negativ=trace_cra_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cca_Anzahl=trace_cca_Anzahl[47], trace_cca_Positiv=trace_cca_Positiv[47], trace_cca_Negativ=trace_cca_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cess_Anzahl=trace_cess_Anzahl[47], trace_cess_Positiv=trace_cess_Positiv[47], trace_cess_Negativ=trace_cess_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cmtk_Anzahl=trace_cmtk_Anzahl[47], trace_cmtk_Positiv=trace_cmtk_Positiv[47], trace_cmtk_Negativ=trace_cmtk_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_che_Anzahl=trace_che_Anzahl[47], trace_che_Positiv=trace_che_Positiv[47], trace_che_Negativ=trace_che_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_clo_Anzahl=trace_clo_Anzahl[47], trace_clo_Positiv=trace_clo_Positiv[47], trace_clo_Negativ=trace_clo_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cre_Anzahl=trace_cre_Anzahl[47], trace_cre_Positiv=trace_cre_Positiv[47], trace_cre_Negativ=trace_cre_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_chei_Anzahl=trace_chei_Anzahl[47], trace_chei_Positiv=trace_chei_Positiv[47], trace_chei_Negativ=trace_chei_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cka_Anzahl=trace_cka_Anzahl[47], trace_cka_Positiv=trace_cka_Positiv[47], trace_cka_Negativ=trace_cka_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("22.05.2020")
+                data <- data.frame(x, trace_cma_Anzahl=trace_cma_Anzahl[47], trace_cma_Positiv=trace_cma_Positiv[47], trace_cma_Negativ=trace_cma_Negativ[47])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            
+        }
+        else if (input$filterD== "21.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_c_Anzahl = trace_c_Anzahl[46], trace_c_Positiv = trace_c_Positiv[46], trace_c_Negativ = trace_c_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cim_Anzahl=trace_cim_Anzahl[46], trace_cim_Positiv=trace_cim_Positiv[46], trace_cim_Negativ=trace_cim_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cem_Anzahl=trace_cem_Anzahl[46], trace_cem_Positiv=trace_cem_Positiv[46], trace_cem_Negativ=trace_cem_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cra_Anzahl=trace_cra_Anzahl[46], trace_cra_Positiv=trace_cra_Positiv[46], trace_cra_Negativ=trace_cra_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cca_Anzahl=trace_cca_Anzahl[46], trace_cca_Positiv=trace_cca_Positiv[46], trace_cca_Negativ=trace_cca_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cess_Anzahl=trace_cess_Anzahl[46], trace_cess_Positiv=trace_cess_Positiv[46], trace_cess_Negativ=trace_cess_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cmtk_Anzahl=trace_cmtk_Anzahl[46], trace_cmtk_Positiv=trace_cmtk_Positiv[46], trace_cmtk_Negativ=trace_cmtk_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_che_Anzahl=trace_che_Anzahl[46], trace_che_Positiv=trace_che_Positiv[46], trace_che_Negativ=trace_che_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_clo_Anzahl=trace_clo_Anzahl[46], trace_clo_Positiv=trace_clo_Positiv[46], trace_clo_Negativ=trace_clo_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cre_Anzahl=trace_cre_Anzahl[46], trace_cre_Positiv=trace_cre_Positiv[46], trace_cre_Negativ=trace_cre_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_chei_Anzahl=trace_chei_Anzahl[46], trace_chei_Positiv=trace_chei_Positiv[46], trace_chei_Negativ=trace_chei_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cka_Anzahl=trace_cka_Anzahl[46], trace_cka_Positiv=trace_cka_Positiv[46], trace_cka_Negativ=trace_cka_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("21.05.2020")
+                data <- data.frame(x, trace_cma_Anzahl=trace_cma_Anzahl[46], trace_cma_Positiv=trace_cma_Positiv[46], trace_cma_Negativ=trace_cma_Negativ[46])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            
+        }
+        else if (input$filterD== "20.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_c_Anzahl = trace_c_Anzahl[45], trace_c_Positiv = trace_c_Positiv[45], trace_c_Negativ = trace_c_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_c_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cim_Anzahl=trace_cim_Anzahl[45], trace_cim_Positiv=trace_cim_Positiv[45], trace_cim_Negativ=trace_cim_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cim_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cem_Anzahl=trace_cem_Anzahl[45], trace_cem_Positiv=trace_cem_Positiv[45], trace_cem_Negativ=trace_cem_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cem_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cra_Anzahl=trace_cra_Anzahl[45], trace_cra_Positiv=trace_cra_Positiv[45], trace_cra_Negativ=trace_cra_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cra_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cca_Anzahl=trace_cca_Anzahl[45], trace_cca_Positiv=trace_cca_Positiv[45], trace_cca_Negativ=trace_cca_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cca_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cess_Anzahl=trace_cess_Anzahl[45], trace_cess_Positiv=trace_cess_Positiv[45], trace_cess_Negativ=trace_cess_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cess_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cmtk_Anzahl=trace_cmtk_Anzahl[45], trace_cmtk_Positiv=trace_cmtk_Positiv[45], trace_cmtk_Negativ=trace_cmtk_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cmtk_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_che_Anzahl=trace_che_Anzahl[45], trace_che_Positiv=trace_che_Positiv[45], trace_che_Negativ=trace_che_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_che_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_clo_Anzahl=trace_clo_Anzahl[45], trace_clo_Positiv=trace_clo_Positiv[45], trace_clo_Negativ=trace_clo_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_clo_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cre_Anzahl=trace_cre_Anzahl[45], trace_cre_Positiv=trace_cre_Positiv[45], trace_cre_Negativ=trace_cre_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cre_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_chei_Anzahl=trace_chei_Anzahl[45], trace_chei_Positiv=trace_chei_Positiv[45], trace_chei_Negativ=trace_chei_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_chei_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cka_Anzahl=trace_cka_Anzahl[45], trace_cka_Positiv=trace_cka_Positiv[45], trace_cka_Negativ=trace_cka_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cka_Negativ, name = 'falsch beantwortet',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',
+                                                     yaxis = a, xaxis = b)
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("20.05.2020")
+                data <- data.frame(x, trace_cma_Anzahl=trace_cma_Anzahl[45], trace_cma_Positiv=trace_cma_Positiv[45], trace_cma_Negativ=trace_cma_Negativ[45])
+                a <- list(title="Besucheranzahl")
+                b<- list(title="Datum")
+                
+                Plotallgbar <- plot_ly(data, x = ~x) 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Anzahl, name = 'Besucheranzahl',type = 'bar') 
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Positiv, name = 'korrekt beantwortet',type = 'bar')
+                Plotallgbar <- Plotallgbar %>% add_trace(y = ~trace_cma_Negativ, name = 'falsch beantwortet',type = 'bar') 
                 Plotallgbar <- Plotallgbar %>%layout(paper_bgcolor='transparent',
                                                      plot_bgcolor='transparent',
                                                      yaxis = a, xaxis = b)
@@ -8219,6 +9296,946 @@ shinyServer(function(input, output) {
             }
             
         }
+        else if (input$filterD== "24.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_c_Prozent_Positiv = trace_c_Prozent_Positiv[49], trace_c_Prozent_Negativ = trace_c_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cim_Prozent_Positiv = trace_cim_Prozent_Positiv[49], trace_cim_Prozent_Negativ = trace_cim_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cem_Prozent_Positiv = trace_cem_Prozent_Positiv[49], trace_cem_Prozent_Negativ = trace_cem_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cra_Prozent_Positiv = trace_cra_Prozent_Positiv[49], trace_cra_Prozent_Negativ = trace_cra_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cca_Prozent_Positiv = trace_cca_Prozent_Positiv[49], trace_cca_Prozent_Negativ = trace_cca_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cess_Prozent_Positiv = trace_cess_Prozent_Positiv[49], trace_cess_Prozent_Negativ = trace_cess_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cmtk_Prozent_Positiv = trace_cmtk_Prozent_Positiv[49], trace_cmtk_Prozent_Negativ = trace_cmtk_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_che_Prozent_Positiv = trace_che_Prozent_Positiv[49], trace_che_Prozent_Negativ = trace_che_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_clo_Prozent_Positiv = trace_clo_Prozent_Positiv[49], trace_clo_Prozent_Negativ = trace_clo_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cre_Prozent_Positiv = trace_cre_Prozent_Positiv[49], trace_cre_Prozent_Negativ = trace_cre_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_chei_Prozent_Positiv = trace_chei_Prozent_Positiv[49], trace_chei_Prozent_Negativ = trace_chei_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cka_Prozent_Positiv = trace_cka_Prozent_Positiv[49], trace_cka_Prozent_Negativ = trace_cka_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cma_Prozent_Positiv = trace_cma_Prozent_Positiv[49], trace_cma_Prozent_Negativ = trace_cma_Prozent_Negativ[49])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+        }
+        else if (input$filterD== "23.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_c_Prozent_Positiv = trace_c_Prozent_Positiv[48], trace_c_Prozent_Negativ = trace_c_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cim_Prozent_Positiv = trace_cim_Prozent_Positiv[48], trace_cim_Prozent_Negativ = trace_cim_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cem_Prozent_Positiv = trace_cem_Prozent_Positiv[48], trace_cem_Prozent_Negativ = trace_cem_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cra_Prozent_Positiv = trace_cra_Prozent_Positiv[48], trace_cra_Prozent_Negativ = trace_cra_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cca_Prozent_Positiv = trace_cca_Prozent_Positiv[48], trace_cca_Prozent_Negativ = trace_cca_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cess_Prozent_Positiv = trace_cess_Prozent_Positiv[48], trace_cess_Prozent_Negativ = trace_cess_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cmtk_Prozent_Positiv = trace_cmtk_Prozent_Positiv[48], trace_cmtk_Prozent_Negativ = trace_cmtk_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_che_Prozent_Positiv = trace_che_Prozent_Positiv[48], trace_che_Prozent_Negativ = trace_che_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_clo_Prozent_Positiv = trace_clo_Prozent_Positiv[48], trace_clo_Prozent_Negativ = trace_clo_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cre_Prozent_Positiv = trace_cre_Prozent_Positiv[48], trace_cre_Prozent_Negativ = trace_cre_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_chei_Prozent_Positiv = trace_chei_Prozent_Positiv[48], trace_chei_Prozent_Negativ = trace_chei_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cka_Prozent_Positiv = trace_cka_Prozent_Positiv[48], trace_cka_Prozent_Negativ = trace_cka_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cma_Prozent_Positiv = trace_cma_Prozent_Positiv[48], trace_cma_Prozent_Negativ = trace_cma_Prozent_Negativ[48])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+        }
+        else if (input$filterD== "22.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_c_Prozent_Positiv = trace_c_Prozent_Positiv[47], trace_c_Prozent_Negativ = trace_c_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cim_Prozent_Positiv = trace_cim_Prozent_Positiv[47], trace_cim_Prozent_Negativ = trace_cim_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cem_Prozent_Positiv = trace_cem_Prozent_Positiv[47], trace_cem_Prozent_Negativ = trace_cem_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cra_Prozent_Positiv = trace_cra_Prozent_Positiv[47], trace_cra_Prozent_Negativ = trace_cra_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cca_Prozent_Positiv = trace_cca_Prozent_Positiv[47], trace_cca_Prozent_Negativ = trace_cca_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cess_Prozent_Positiv = trace_cess_Prozent_Positiv[47], trace_cess_Prozent_Negativ = trace_cess_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cmtk_Prozent_Positiv = trace_cmtk_Prozent_Positiv[47], trace_cmtk_Prozent_Negativ = trace_cmtk_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_che_Prozent_Positiv = trace_che_Prozent_Positiv[47], trace_che_Prozent_Negativ = trace_che_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_clo_Prozent_Positiv = trace_clo_Prozent_Positiv[47], trace_clo_Prozent_Negativ = trace_clo_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cre_Prozent_Positiv = trace_cre_Prozent_Positiv[47], trace_cre_Prozent_Negativ = trace_cre_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_chei_Prozent_Positiv = trace_chei_Prozent_Positiv[47], trace_chei_Prozent_Negativ = trace_chei_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cka_Prozent_Positiv = trace_cka_Prozent_Positiv[47], trace_cka_Prozent_Negativ = trace_cka_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cma_Prozent_Positiv = trace_cma_Prozent_Positiv[47], trace_cma_Prozent_Negativ = trace_cma_Prozent_Negativ[47])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+        }
+        else if (input$filterD== "21.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_c_Prozent_Positiv = trace_c_Prozent_Positiv[46], trace_c_Prozent_Negativ = trace_c_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cim_Prozent_Positiv = trace_cim_Prozent_Positiv[46], trace_cim_Prozent_Negativ = trace_cim_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cem_Prozent_Positiv = trace_cem_Prozent_Positiv[46], trace_cem_Prozent_Negativ = trace_cem_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cra_Prozent_Positiv = trace_cra_Prozent_Positiv[46], trace_cra_Prozent_Negativ = trace_cra_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cca_Prozent_Positiv = trace_cca_Prozent_Positiv[46], trace_cca_Prozent_Negativ = trace_cca_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cess_Prozent_Positiv = trace_cess_Prozent_Positiv[46], trace_cess_Prozent_Negativ = trace_cess_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cmtk_Prozent_Positiv = trace_cmtk_Prozent_Positiv[46], trace_cmtk_Prozent_Negativ = trace_cmtk_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_che_Prozent_Positiv = trace_che_Prozent_Positiv[46], trace_che_Prozent_Negativ = trace_che_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_clo_Prozent_Positiv = trace_clo_Prozent_Positiv[46], trace_clo_Prozent_Negativ = trace_clo_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cre_Prozent_Positiv = trace_cre_Prozent_Positiv[46], trace_cre_Prozent_Negativ = trace_cre_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_chei_Prozent_Positiv = trace_chei_Prozent_Positiv[46], trace_chei_Prozent_Negativ = trace_chei_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cka_Prozent_Positiv = trace_cka_Prozent_Positiv[46], trace_cka_Prozent_Negativ = trace_cka_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cma_Prozent_Positiv = trace_cma_Prozent_Positiv[46], trace_cma_Prozent_Negativ = trace_cma_Prozent_Negativ[46])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+        }
+        else if (input$filterD== "20.05.2020") {
+            
+            if (input$filterC== "Corey") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_c_Prozent_Positiv = trace_c_Prozent_Positiv[45], trace_c_Prozent_Negativ = trace_c_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+            else if (input$filterC== "Corey-IM") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cim_Prozent_Positiv = trace_cim_Prozent_Positiv[45], trace_cim_Prozent_Negativ = trace_cim_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Emmendingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cem_Prozent_Positiv = trace_cem_Prozent_Positiv[45], trace_cem_Prozent_Negativ = trace_cem_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Ravensburg") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cra_Prozent_Positiv = trace_cra_Prozent_Positiv[45], trace_cra_Prozent_Negativ = trace_cra_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Calw") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cca_Prozent_Positiv = trace_cca_Prozent_Positiv[45], trace_cca_Prozent_Negativ = trace_cca_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Esslingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cess_Prozent_Positiv = trace_cess_Prozent_Positiv[45], trace_cess_Prozent_Negativ = trace_cess_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Main-Tauber-Kreis") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cmtk_Prozent_Positiv = trace_cmtk_Prozent_Positiv[45], trace_cmtk_Prozent_Negativ = trace_cmtk_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heilbronn") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_che_Prozent_Positiv = trace_che_Prozent_Positiv[45], trace_che_Prozent_Negativ = trace_che_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Loerrach") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_clo_Prozent_Positiv = trace_clo_Prozent_Positiv[45], trace_clo_Prozent_Negativ = trace_clo_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Reutlingen") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cre_Prozent_Positiv = trace_cre_Prozent_Positiv[45], trace_cre_Prozent_Negativ = trace_cre_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Heidenheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_chei_Prozent_Positiv = trace_chei_Prozent_Positiv[45], trace_chei_Prozent_Negativ = trace_chei_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Karlsruhe") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cka_Prozent_Positiv = trace_cka_Prozent_Positiv[45], trace_cka_Prozent_Negativ = trace_cka_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            else if (input$filterC== "Corey-Mannheim") {
+                
+                x<-c("Korrekt beantwortet", "Falsch beantwortet")
+                y<-rbind(trace_cma_Prozent_Positiv = trace_cma_Prozent_Positiv[45], trace_cma_Prozent_Negativ = trace_cma_Prozent_Negativ[45])
+                data <- data.frame(x, y)
+                
+                
+                Plotallgpie <- plot_ly(data, labels = ~x, values = ~y, type = 'pie') 
+                Plotallgpie <- Plotallgpie %>%layout(paper_bgcolor='transparent',
+                                                     plot_bgcolor='transparent',title = 'korrekt vs falsch beabtwortete Fragen',
+                                                     xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                                                     yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                
+            }
+            
+        }
         else if (input$filterD== "19.05.2020") {
             
             if (input$filterC== "Corey") {
@@ -15101,9 +17118,9 @@ shinyServer(function(input, output) {
     
     output$Plotfeed <- renderPlotly({
         
-        x=c("06-04-2020", "07-04-2020", "08-04-2020", "09-04-2020", "10-04-2020", "11-04-2020", "12-04-2020", "13-04-2020", "14-04-2020", "15-04-2020", "16-04-2020", "17-04-2020", "18-04-2020", "19-04-2020", "20-04-2020", "21-04-2020", "22-04-2020", "23-04-2020", "24-04-2020", "25-04-2020", "26-04-2020", "27-04-2020", "28-04-2020", "29-04-2020", "30-04-2020", "01-05-2020", "02-05-2020", "03-05-2020", "04-05-2020", "05-05-2020", "06-05-2020", "07-05-2020", "08-05-2020", "09-05-2020", "10-05-2020", "11-05-2020", "12-05-2020", "13-05-2020", "14-05-2020", "15-05-2020", "16-05-2020", "17-05-2020", "18-05-2020", "19-05-2020")
+        x=c("06-04-2020", "07-04-2020", "08-04-2020", "09-04-2020", "10-04-2020", "11-04-2020", "12-04-2020", "13-04-2020", "14-04-2020", "15-04-2020", "16-04-2020", "17-04-2020", "18-04-2020", "19-04-2020", "20-04-2020", "21-04-2020", "22-04-2020", "23-04-2020", "24-04-2020", "25-04-2020", "26-04-2020", "27-04-2020", "28-04-2020", "29-04-2020", "30-04-2020", "01-05-2020", "02-05-2020", "03-05-2020", "04-05-2020", "05-05-2020", "06-05-2020", "07-05-2020", "08-05-2020", "09-05-2020", "10-05-2020", "11-05-2020", "12-05-2020", "13-05-2020", "14-05-2020", "15-05-2020", "16-05-2020", "17-05-2020", "18-05-2020", "19-05-2020", "20-05-2020", "21-05-2020", "22-05-2020", "23-05-2020", "24-05-2020")
         x <-as.Date(x, format = "%d-%m-%y")
-        y=c(119, 132, 120, 111, 94, 61, 45, 57, 170, 236, 306, 239, 176, 135, 191, 276, 437, 419, 434, 316, 384, 467, 433, 422, 439, 413, 422, 483, 595, 505, 745, 722, 469, 364, 343, 449, 348, 328, 357, 341, 256, 344, 440, 386)
+        y=c(119, 132, 120, 111, 94, 61, 45, 57, 170, 236, 306, 239, 176, 135, 191, 276, 437, 419, 434, 316, 384, 467, 433, 422, 439, 413, 422, 483, 595, 505, 745, 722, 469, 364, 343, 449, 348, 328, 357, 341, 256, 344, 440, 386, 347, 231, 211, 193, 237)
         data <- data.frame(trace_c_Datum, trace_c_Prozent_Positiv, trace_c_Prozent_Negativ)
         a <- list(title="Gesamtanzahl der Feedbacks")
         b<- list(title="Datum")
@@ -15119,7 +17136,7 @@ shinyServer(function(input, output) {
     output$Plottop <- renderPlotly({
         
         x=c("Kontaktverbot-Privat Bereich", "Kontaktverbot", "Veranstaltungsverbot", "Aus- und Einreise", "Hotels", "Gastronomie",  "Sport Verordnung", "Risikogebiete", "Kontaktverbot-Öffentlichen Raum",  "Regeln Autofahrten")
-        y=c(14, 12, 8, 5, 4, 4, 3, 2, 5, 3)
+        y=c(24, 22, 18, 10, 7, 6, 3, 2, 5, 3)
         a <- list(title="Prozent (%)")
         b<- list(title="Themen")
         
